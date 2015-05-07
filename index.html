@@ -1,0 +1,164 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <title>Beautiful maps - 3WA</title>
+        <meta name="description" content="Maps examples with Leaflet and Google Maps">
+        <meta name="viewport" content="width=device-width">
+        <link rel="stylesheet" href="css/normalize.min.css">
+        <link rel="stylesheet" href="css/main.css">
+
+        <!-- Google Map API -->
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
+
+        <!-- Leaflet API -->
+        <link rel="stylesheet" href="leaflet/leaflet.css" />
+        <script src="leaflet/leaflet.js"></script>
+
+        <!-- default settings -->
+        <script>
+            var defaultSettings = {
+                lat : 47.218371,
+                lng: -1.553621,
+                zoom: 8,
+            }
+        </script>
+
+    </head>
+    <body>
+
+        <header>
+            <h1>Beautiful Maps</h1>
+        </header>
+
+        <main>
+
+            <section class="map-wrapper map-leaflet">
+                <h2>Leaflet (OSM)</h2>
+                <div class="inner">
+                    <h3>Example</h3>
+                    <div id="map-leaflet-map" class="map-element"></div>
+                    <!-- script tag must be placed after html map element. -->
+                    <script>
+                        // Create map
+                        var map = L.map('map-leaflet-map').setView([defaultSettings.lat, defaultSettings.lng], defaultSettings.zoom);
+
+                        // Add tile layer
+                        L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: 'Map data © <a href="http://openstreetmap.org">OpenStreetMap</a> contributors',
+                            maxZoom: 18
+                        }).addTo(map);
+
+                        // Add marker
+                        var marker = L.marker([defaultSettings.lat, defaultSettings.lng]).addTo(map);
+
+                    </script>
+                    <div class="docs">
+                        <h3>Docs</h3>
+                        <ul>
+                            <li><a href="http://leafletjs.com/reference.html">Leaflet API reference</a></li>
+                            <li><a href="http://leafletjs.com/examples.html">Examples</a></li>
+                        </ul>
+                    </div>
+                    <div class="code">
+                        <h3>Code</h3>
+                        <div class="inner">
+                            <h4>HTML</h4>
+                            <pre class="html language-markup"><code>
+&lt;div id="map"&gt;&lt;/div&gt;
+</code></pre>
+                            <h4>JS</h4>
+                            <pre class="js language-javascript"><code>
+// Create map
+var map = L.map('map').setView([47.218371, -1.553621], defaultSettings.zoom);
+
+// Add tile layer
+L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: 'Map data © &lt;a href="http://openstreetmap.org"&gt;OpenStreetMap&lt;/a&gt; contributors',
+    maxZoom: 18
+}).addTo(map);
+
+// Add marker
+var marker = L.marker([47.218371, -1.553621]).addTo(map);
+</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="map-wrapper map-google">
+                <h2>Google Maps</h2>
+                <div class="inner">
+                    <h3>Example</h3>
+                    <div id="map-google-map" class="map-element"></div>
+                    <!-- script tag must be placed after html map element. -->
+                    <script>
+                        var map;
+                        function initialize() {
+                            // Initialize map
+                            var mapOptions = {
+                                zoom: defaultSettings.zoom,
+                                center: new google.maps.LatLng(defaultSettings.lat, defaultSettings.lng)
+                            };
+                            map = new google.maps.Map(document.getElementById('map-google-map'), mapOptions);
+
+                            // Create marker
+                            var myLatlng = new google.maps.LatLng(defaultSettings.lat, defaultSettings.lng);
+                            var marker = new google.maps.Marker({
+                                position: myLatlng,
+                                map: map,
+                                title: 'Google Map Marker'
+                            });
+                        }
+
+                        // Load map
+                        google.maps.event.addDomListener(window, 'load', initialize);
+                    </script>
+                    <div class="docs">
+                        <h3>Docs</h3>
+                        <ul>
+                            <li><a href="https://developers.google.com/maps/documentation/javascript/">Google Maps Javascript API v3</a></li>
+                            <li><a href="https://developers.google.com/maps/documentation/javascript/examples/">Examples</a></li>
+                        </ul>
+                    </div>
+                    <div class="code">
+                        <h3>Code</h3>
+                        <div class="inner">
+                            <h4>HTML</h4>
+                            <pre class="html language-markup"><code>
+&lt;div id="map"&gt;&lt;/div&gt;
+</code></pre>
+                            <h4>JS</h4>
+                            <pre class="js language-javascript"><code>
+var map;
+function initialize() {
+    // Initialize map
+    var mapOptions = {
+        zoom: defaultSettings.zoom,
+        center: new google.maps.LatLng(47.218371, -1.553621)
+    };
+    map = new google.maps.Map(document.getElementById('map'), mapOptions);
+
+    // Create marker
+    var myLatlng = new google.maps.LatLng(47.218371, -1.553621);
+    var marker = new google.maps.Marker({
+        position: myLatlng,
+        map: map,
+        title: 'Google Map Marker'
+    });
+}
+
+// Load map
+google.maps.event.addDomListener(window, 'load', initialize);
+</code></pre>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- syntax highlighting -->
+        <link rel="stylesheet" href="js/vendor/prism/prism.css">
+        <script src="js/vendor/prism/prism.js"></script>
+    </body>
+</html>
